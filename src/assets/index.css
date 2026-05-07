@@ -1,1 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --primary: #212842;
+    --primary-hover: #3c4360;
+    --secondary: #fffce4;
+    --secondary-hover: #d8d6bd;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+.primaryBackground {
+    background-color: var(--secondary);
+    color: var(--primary);
+    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+}
+
+.primaryBackground:hover {
+    background-color: var(--primary-hover);
+    color: var(--secondary-hover);
+    transform: scale(1.05);
+    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+}
+
+header h1 {
+    color: var(--secondary);
+}
+
+
+
+
 @import 'tailwindcss';

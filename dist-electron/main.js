@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 createRequire(import.meta.url);
 const __dirname$1 = path.dirname(fileURLToPath(import.meta.url));
+const colorScheme = ["#212842", "#fffce4"];
 process.env.APP_ROOT = path.join(__dirname$1, "..");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
@@ -13,6 +14,13 @@ let win;
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    backgroundColor: colorScheme[0],
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: colorScheme[0],
+      symbolColor: colorScheme[1],
+      height: 32
+    },
     webPreferences: {
       preload: path.join(__dirname$1, "preload.mjs")
     }
