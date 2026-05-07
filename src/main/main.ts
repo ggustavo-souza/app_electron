@@ -5,6 +5,7 @@ import path from 'node:path'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const colorScheme = ["#212842", "#fffce4"]
 
 // The built directory structure
 //
@@ -29,6 +30,13 @@ let win: BrowserWindow | null
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    backgroundColor: colorScheme[0],
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: colorScheme[0],
+      symbolColor: colorScheme[1],
+      height: 32
+    },
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },

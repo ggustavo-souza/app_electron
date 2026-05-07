@@ -1,7 +1,11 @@
+import "../../assets/index.css"
+
 export default function Tarefas() {
     return (
         <>
-            <h1>Tarefas</h1>
+            <header>
+                <h1 className="text-3xl mt-10">Tarefas</h1>
+            </header>
         </>
     )
 }

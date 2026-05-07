@@ -1,8 +1,9 @@
 export default function Configs() {
     return (
         <>
-            <h1>Configurações</h1>
-            <p>Configurações do aplicativo</p>
+            <header>
+                <h1 className="text-3xl mt-10">Configurações</h1>
+            </header>
         </>
     )
 }
