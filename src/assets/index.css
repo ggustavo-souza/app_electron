@@ -25,7 +25,13 @@
     transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
 }
 
-header h1 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--secondary);
 }
 
