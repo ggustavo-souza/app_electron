@@ -5,6 +5,7 @@ import '../assets/index.css';
 
 function App() {
   const [currentView, setCurrentView] = useState('tasks')
+  // const [loading, setLoading] = useState('true');
   return (
     <>
       <main className='m-12'>
