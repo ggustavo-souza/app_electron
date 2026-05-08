@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Tarefas from './components/Tarefas'
 import Configs from './components/Configs'
 import '../assets/index.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   const [currentView, setCurrentView] = useState('tasks')
@@ -11,7 +12,7 @@ function App() {
       <main className='m-12'>
         <div className='flex gap-2'>
           <button className='primaryBackground border-none font-bold py-2 px-6 rounded' onClick={() => setCurrentView('tasks')}>Tarefas</button>
-          <button className='primaryBackground border-none font-bold py-2 px-6 rounded mx-4' onClick={() => setCurrentView('settings')}>Configurações</button>
+          <button className='primaryBackground border-none font-bold py-2 px-6 rounded mx-4 gap-2 flex gap-2' onClick={() => setCurrentView('settings')}><i className='bi bi-gear-fill font-bold'></i>Configurações</button>
         </div>
         <div>
           {currentView === 'tasks' && <Tarefas />}
