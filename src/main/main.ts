@@ -1,29 +1,44 @@
-import { app, BrowserWindow } from 'electron'
-import { createRequire } from 'node:module'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { db } from './db'
+import { tarefas } from './schema'
+import { desc, eq } from 'drizzle-orm'
 
-const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const colorScheme = ["#212842", "#fffce4"]
 
-// The built directory structure
-//
-// ├─┬─┬ dist
-// │ │ └── index.html
-// │ │
-// │ ├─┬ dist-electron
-// │ │ ├── main.js
-// │ │ └── preload.mjs
-// │
 process.env.APP_ROOT = path.join(__dirname, '..')
 
-// 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
+
 export const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron')
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
 
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 'public') : RENDERER_DIST
+
+// pega as tarefas e ordena pela mais recente
+ipcMain.handle('get-tarefas', async () => {
+  return await db.select().from(tarefas).orderBy(desc(tarefas.criada_em));
+})
+
+// cria uma tarefa
+ipcMain.handle("criar-tarefa", async (_, titulo: string, descricao: string) => {
+  if (!titulo) return;
+
+  return await db.insert(tarefas).values({
+    titulo: titulo,
+    descricao: descricao,
+    concluida: false,
+    criada_em: new Date().getTime(),
+    concluida_em: null
+  });
+})
+
+// //marca uma tarefa como concluida
+ipcMain.handle('marcar-como-concluida', async (_, id: number, concluida: boolean) => {
+  return await db.update(tarefas).set({ concluida }).where(eq(tarefas.id, id))
+})
 
 let win: BrowserWindow | null
 
@@ -42,7 +57,6 @@ function createWindow() {
     },
   })
 
-  // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
@@ -50,14 +64,10 @@ function createWindow() {
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)
   } else {
-    // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
 }
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
@@ -66,8 +76,6 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
