@@ -4,6 +4,7 @@ declare global {
     interface Window {
         api: {
             getTarefas: () => Promise<Tarefa[]>;
+            criarTarefa: (titulo: string, descricao: string) => Promise<void>;
         }
     }
 }

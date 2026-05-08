@@ -1,6 +1,7 @@
 import "../../assets/index.css"
 import { useEffect, useState } from "react"
 import { Tarefa } from "../../types/electron";
+import BotaoAdicionarTarefa from "./BotaoAdicionarTarefa";
 
 export default function Tarefas() {
     const [tarefas, setTarefas] = useState<Tarefa[]>([]);
@@ -22,7 +23,7 @@ export default function Tarefas() {
             <main>
                 <div className="mt-10">
                     {tarefas.length === 0 && (
-                        <p>Nenhuma tarefa encontrada</p>
+                        <BotaoAdicionarTarefa semPedidos={false} />
                     )}
                     {tarefas.map(tarefa => (
                         <div key={tarefa.id} className="flex justify-between items-center">
