@@ -13,6 +13,13 @@ export default defineConfig({
       main: {
         // Shortcut of `build.lib.entry`.
         entry: 'src/main/main.ts',
+        vite: {
+          build: {
+            rollupOptions: {
+              external: ['better-sqlite3'],
+            },
+          },
+        },
       },
       preload: {
         // Shortcut of `build.rollupOptions.input`.
