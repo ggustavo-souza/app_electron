@@ -23,17 +23,17 @@ ipcMain.handle('get-tarefas', async () => {
 })
 
 // cria uma tarefa
-// ipcMain.handle("criar-tarefa", async (_, titulo: string, descricao: string) => {
-//   if (!titulo) return;
+ipcMain.handle("criar-tarefa", async (_, titulo: string, descricao: string) => {
+  if (!titulo) return;
 
-//   return await db.insert(tarefas).values({
-//     titulo: titulo,
-//     descricao: descricao,
-//     concluida: false,
-//     criada_em: new Date().getTime(),
-//     concluida_em: null
-//   });
-// })
+  return await db.insert(tarefas).values({
+    titulo: titulo,
+    descricao: descricao,
+    concluida: false,
+    criada_em: new Date(),
+    concluida_em: null
+  });
+})
 
 // //marca uma tarefa como concluida
 ipcMain.handle('marcar-como-concluida', async (_, id: number, concluida: boolean) => {
@@ -47,6 +47,10 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     backgroundColor: colorScheme[0],
     titleBarStyle: 'hidden',
+    minHeight: 600,
+    minWidth: 800,
+    resizable: true,
+    movable: true,
     titleBarOverlay: {
       color: colorScheme[0],
       symbolColor: colorScheme[1],
@@ -56,6 +60,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.mjs'),
     },
   })
+
 
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())

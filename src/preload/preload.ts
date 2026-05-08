@@ -18,7 +18,9 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     const [channel, ...omit] = args
     return ipcRenderer.invoke(channel, ...omit)
   },
+})
 
-  // You can expose other APTs you need here.
-  // ...
+contextBridge.exposeInMainWorld('api', {
+  getTarefas: () => ipcRenderer.invoke('get-tarefas'),
+  createTarefa: (titulo: string, descricao: string) => ipcRenderer.invoke('criar-tarefa', titulo, descricao),
 })
