@@ -23,7 +23,7 @@ export default function Tarefas() {
             <main>
                 <div className="mt-10">
                     {tarefas.length === 0 && (
-                        <BotaoAdicionarTarefa semPedidos={false} />
+                        <BotaoAdicionarTarefa semPedidos={true} />
                     )}
                     {tarefas.map(tarefa => (
                         <div key={tarefa.id} className="flex justify-between items-center">
@@ -32,6 +32,9 @@ export default function Tarefas() {
                         </div>
                     ))}
                 </div>
+                {tarefas.length > 0 && (
+                    <BotaoAdicionarTarefa semPedidos={false} />
+                )}
             </main>
         </>
     )
