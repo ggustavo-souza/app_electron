@@ -25,25 +25,29 @@
     transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
 }
 
-.secondaryIcon {
-    color: var(--secondary)
-}
-
-.primaryIcon {
-    color: var(--primary)
-}
-
+.secondaryIcon,
 p,
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-    color: var(--secondary);
+h6,
+.secondaryText {
+    color: var(--secondary)
 }
 
+.primaryIcon,
+.primaryText {
+    color: var(--primary)
+}
 
+.secondaryText:hover {
+    color: var(--primary);
+}
 
+.primaryText:hover {
+    color: var(--secondary);
+}
 
 @import 'tailwindcss';
