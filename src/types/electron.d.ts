@@ -12,6 +12,7 @@ declare global {
 export type Tarefa = {
     id: number;
     titulo: string;
+    descricao: string;
     status: 'pendente' | 'concluida';
     criado_em: string;
     concluido_em: string | null;

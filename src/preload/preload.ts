@@ -22,5 +22,5 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
 contextBridge.exposeInMainWorld('api', {
   getTarefas: () => ipcRenderer.invoke('get-tarefas'),
-  createTarefa: (titulo: string, descricao: string) => ipcRenderer.invoke('criar-tarefa', titulo, descricao),
+  criarTarefa: (titulo: string, descricao: string) => ipcRenderer.invoke('criar-tarefa', titulo, descricao),
 })
