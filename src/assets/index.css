@@ -13,16 +13,34 @@
 }
 
 .primaryBackground {
+    background-color: var(--primary);
+    color: var(--secondary);
+    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+}
+
+.primaryBackground:hover {
+    background-color: var(--secondary-hover);
+    color: var(--primary-hover);
+    transform: scale(1.05);
+    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+}
+
+.secondaryBackground {
     background-color: var(--secondary);
     color: var(--primary);
     transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
 }
 
-.primaryBackground:hover {
+.secondaryBackground:hover {
     background-color: var(--primary-hover);
     color: var(--secondary-hover);
     transform: scale(1.05);
     transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+}
+
+.fundoPrimary {
+    background-color: var(--primary);
+    color: var(--secondary);
 }
 
 .secondaryIcon,
@@ -40,14 +58,6 @@ h6,
 .primaryIcon,
 .primaryText {
     color: var(--primary)
-}
-
-.secondaryText:hover {
-    color: var(--primary);
-}
-
-.primaryText:hover {
-    color: var(--secondary);
 }
 
 @import 'tailwindcss';
