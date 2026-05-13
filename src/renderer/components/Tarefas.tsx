@@ -15,6 +15,15 @@ export default function Tarefas() {
         puxarTarefas();
     }, [])
 
+    const formatarData = (data: string) => {
+        const date = new Date(data);
+        return date.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    }
+
     return (
         <>
             <header>
@@ -28,10 +37,10 @@ export default function Tarefas() {
                     {tarefas.map(tarefa => (
                         <div key={tarefa.id} className="border-2 border-red-400 p-5 rounded-md w-full">
                             <div className="flex items-center justify-between">
-                                <p>{tarefa.titulo}</p>
-                                <p>{tarefa.status}</p>
+                                <p className="text-2xl font-bold">{tarefa.titulo}</p>
+                                <p className="text-md">{formatarData(tarefa.criado_em)}</p>
                             </div>
-                            <p>{tarefa.descricao}</p>
+                            <p className="text-md mt-2">{tarefa.descricao}</p>
                         </div>
                     ))}
                     {tarefas.length > 0 && (
