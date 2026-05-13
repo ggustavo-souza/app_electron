@@ -13,7 +13,7 @@ export type Tarefa = {
     id: number;
     titulo: string;
     descricao: string;
-    status: 'pendente' | 'concluida';
+    concluida: boolean;
     criado_em: string;
     concluido_em: string | null;
 }

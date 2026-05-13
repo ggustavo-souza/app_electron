@@ -19,7 +19,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 
 // pega as tarefas e ordena pela mais recente
 ipcMain.handle('get-tarefas', async () => {
-  return await db.select().from(tarefas).orderBy(desc(tarefas.criada_em));
+  return await db.select().from(tarefas).orderBy(desc(tarefas.criado_em));
 })
 
 // cria uma tarefa
@@ -30,8 +30,8 @@ ipcMain.handle("criar-tarefa", async (_, titulo: string, descricao: string) => {
     titulo: titulo,
     descricao: descricao,
     concluida: false,
-    criada_em: new Date(),
-    concluida_em: null
+    criado_em: new Date(),
+    concluido_em: null
   });
 })
 
