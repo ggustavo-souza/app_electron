@@ -13,7 +13,7 @@ export default function BotaoAdicionarTarefa({ semPedidos, puxarTarefas }: Botao
     return (
         <>
             {semPedidos && (
-                <div className="ring-2 w-full ring-gray-500 shadow-md shadow-blue-950 px-8 py-16 rounded-md">
+                <div className="ring-2 w-full ring-gray-100 shadow-md shadow-blue-950 px-8 py-16 rounded-md">
                     <div className="flex gap-2 mb-5 items-center flex-col justify-center">
                         <i className="bi bi-emoji-frown text-5xl secondaryIcon"></i>
                         <p className="text-xl font-semibold">Nenhum pedido foi encontrado...</p>
@@ -26,7 +26,7 @@ export default function BotaoAdicionarTarefa({ semPedidos, puxarTarefas }: Botao
                 </div>
             )}
             {!semPedidos && (
-                <div className="ring-2 w-full ring-gray-500 shadow-md shadow-blue-950 px-8 py-16 rounded-md">
+                <div className="ring-2 w-full ring-gray-100 shadow-md shadow-blue-950 px-8 py-16 rounded-md">
                     <div className="w-full flex items-center justify-center">
                         <button className="px-8 py-3 rounded-lg secondaryBackground font-bold text-lg" onClick={() => setJanelaTarefa(true)}>
                             Adicionar tarefa
