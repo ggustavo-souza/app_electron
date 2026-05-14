@@ -40,6 +40,10 @@ ipcMain.handle('marcar-como-concluida', async (_, id: number, concluida: boolean
   return await db.update(tarefas).set({ concluida }).where(eq(tarefas.id, id))
 })
 
+ipcMain.handle('excluir-tarefa', async (_, id: number) => {
+  return await db.delete(tarefas).where(eq(tarefas.id, id))
+})
+
 let win: BrowserWindow | null
 
 function createWindow() {

@@ -23,4 +23,6 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 contextBridge.exposeInMainWorld('api', {
   getTarefas: () => ipcRenderer.invoke('get-tarefas'),
   criarTarefa: (titulo: string, descricao: string) => ipcRenderer.invoke('criar-tarefa', titulo, descricao),
+  marcarComoConcluida: (id: number, concluida: boolean) => ipcRenderer.invoke('marcar-como-concluida', id, concluida),
+  excluirTarefa: (id: number) => ipcRenderer.invoke('excluir-tarefa', id),
 })
