@@ -5,6 +5,8 @@ declare global {
         api: {
             getTarefas: () => Promise<Tarefa[]>;
             criarTarefa: (titulo: string, descricao: string) => Promise<void>;
+            marcarComoConcluida: (id: number, concluida: boolean) => Promise<void>;
+            excluirTarefa: (id: number) => Promise<void>;
         }
     }
 }
