@@ -15,7 +15,7 @@ export default function JanelaTarefa({ setJanelaTarefa, puxarTarefas }: JanelaTa
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
             <div className="fundoPrimary p-6 rounded-lg shadow-lg w-1/2 h-1/2">
                 <h2 className="text-2xl font-bold secondaryText">Adicionar Tarefa</h2>
                 <form>
