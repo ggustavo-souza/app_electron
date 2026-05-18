@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { db } from './db'
@@ -49,15 +49,15 @@ let win: BrowserWindow | null
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
-    backgroundColor: colorScheme[0],
+    backgroundColor: nativeTheme.shouldUseDarkColors ? colorScheme[0] : colorScheme[1], //seta a cor de fundo da janela
     titleBarStyle: 'hidden',
     minHeight: 600,
     minWidth: 800,
     resizable: true,
     movable: true,
     titleBarOverlay: {
-      color: colorScheme[0],
-      symbolColor: colorScheme[1],
+      color: nativeTheme.shouldUseDarkColors ? colorScheme[1] : colorScheme[0], // seta a cor dos botoes da barra de titulo no modo dark/light
+      symbolColor: nativeTheme.shouldUseDarkColors ? colorScheme[0] : colorScheme[1], // seta a cor dos simbolos dos botoes da barra de titulo no modo dark/light
       height: 32
     },
     webPreferences: {
@@ -77,6 +77,27 @@ function createWindow() {
   }
 }
 
+app.whenReady().then(() => {
+  //verifica se o dark mode está ativo
+  ipcMain.handle('dark-mode:is-dark', () => {
+    return nativeTheme.shouldUseDarkColors
+  })
+
+  //ativa/desativa o dark mode
+  ipcMain.handle('dark-mode:toggle', () => {
+    if (nativeTheme.shouldUseDarkColors) {
+      nativeTheme.themeSource = 'light'
+    } else {
+      nativeTheme.themeSource = 'dark'
+    }
+    //envia a informação para o front-end
+    win?.webContents.send('theme-changed', nativeTheme.shouldUseDarkColors)
+    return nativeTheme.shouldUseDarkColors
+  })
+
+  createWindow()
+})
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
@@ -89,5 +110,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-app.whenReady().then(createWindow)
