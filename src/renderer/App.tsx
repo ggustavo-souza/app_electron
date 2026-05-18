@@ -1,4 +1,4 @@
-import { useState, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Tarefas from './components/Tarefas'
 import Configs from './components/Configs'
 import '../assets/index.css';
@@ -7,7 +7,30 @@ import LoadingSpinner from './components/LoadingSpinner';
 
 function App() {
   const [currentView, setCurrentView] = useState('tasks')
-  // const [loading, setLoading] = useState('true');
+
+  useEffect(() => {
+    // comeca verificando se o dark mode está ativo
+    const initTheme = async () => {
+      const isDark = await window.darkMode.isDark()
+      if (isDark) {
+        document.body.classList.add('dark')
+      } else {
+        document.body.classList.remove('dark')
+      }
+    }
+    initTheme()
+
+    // se o dark mode mudar no arquivo main ele atualiza aqui, e executa o callback
+    const removeListener = window.api.onThemeChange((isDark) => {
+      if (isDark) {
+        document.body.classList.add('dark')
+      } else {
+        document.body.classList.remove('dark')
+      }
+    })
+
+    return () => removeListener()
+  }, [])
   return (
     <>
       <Suspense fallback={<LoadingSpinner />}>
