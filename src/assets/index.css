@@ -7,6 +7,18 @@
     --secondary-hover: #d8d6bd;
 }
 
+body {
+    background-color: var(--secondary);
+    color: var(--primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Fundo no modo dark */
+body.dark {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
@@ -15,38 +27,76 @@
     scroll-behavior: smooth;
 }
 
-.primaryBackground {
+/* botoes no modo light */
+.primaryBackground,
+.secondaryBackground {
     background-color: var(--primary);
     color: var(--secondary);
-    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.primaryBackground:hover {
+/* hover dos botoes no modo light */
+.primaryBackground:hover,
+.secondaryBackground:hover {
     background-color: var(--secondary-hover);
     color: var(--primary-hover);
     transform: scale(1.05);
-    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
 }
 
-.secondaryBackground {
+/* botoes no modo dark */
+body.dark .primaryBackground,
+body.dark .secondaryBackground {
     background-color: var(--secondary);
     color: var(--primary);
-    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
 }
 
-.secondaryBackground:hover {
+/* hover dos botoes no modo dark */
+body.dark .primaryBackground:hover,
+body.dark .secondaryBackground:hover {
     background-color: var(--primary-hover);
     color: var(--secondary-hover);
-    transform: scale(1.05);
-    transition: background-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
 }
 
+/* fundos no modo light */
 .fundoPrimary {
+    background-color: var(--secondary);
+    color: var(--primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* fundo light secundario */
+.fundoPrimaryLeve {
+    background-color: var(--secondary-hover);
+    color: var(--primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* fundo secundario */
+.fundoSecondary {
+    background-color: var(--primary);
+    color: var(--secondary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* fundos no dark mode */
+body.dark .fundoPrimary {
     background-color: var(--primary);
     color: var(--secondary);
 }
 
-.secondaryIcon,
+/* fundo dark leve */
+body.dark .fundoPrimaryLeve {
+    background-color: var(--primary-hover);
+    color: var(--secondary);
+}
+
+/* fundo dark secundario */
+body.dark .fundoSecondary {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+/* textos/icones no modo light */
 p,
 h1,
 h2,
@@ -54,13 +104,27 @@ h3,
 h4,
 h5,
 h6,
-.secondaryText {
-    color: var(--secondary)
+.secondaryText,
+.secondaryIcon,
+.primaryText,
+.primaryIcon {
+    color: var(--primary);
+    transition: color 0.3s ease;
 }
 
-.primaryIcon,
-.primaryText {
-    color: var(--primary)
+/* textos/icones no modo dark */
+body.dark p,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark .secondaryText,
+body.dark .secondaryIcon,
+body.dark .primaryText,
+body.dark .primaryIcon {
+    color: var(--secondary);
 }
 
 
